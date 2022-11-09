@@ -9,7 +9,7 @@ This solution allows you to export the agents in Amazon Connect and their releva
 
 #We can then manually download the file from S3 bucket.
 
-Please Note: For this solution to work, make sure your Lambda code has relevant read/write permissions to S3,AWS Connect etc, otherwise your Lambda Execution will fail. Also increase the time out if long list of agents in your contact center. Additionally the pagination settings has to be modified for extremely high API calls.
+Please Note: For this solution to work, make sure your Lambda code has relevant read/write permissions to S3,AWS Connect etc, otherwise your Lambda Execution will fail. Also increase the time out if long list of agents in your contact center. 
 
 This solution can be customized as per your needs further, by modifying the codes and also can be extended with another Lambda to send email via SES, when file gets stored in S3 bucket.
 
@@ -17,3 +17,4 @@ This solution can be customized as per your needs further, by modifying the code
 Most common errors:
 Permission Denied errors: Make sure you have provided IAM role of Lambda relevant permissions like reading files from S3,AWS Connect getting agent list and describing attributes in AWS Connect.
 Timeout Errors- Make sure your Lambda has enough time out to run properly, and adjust as per your agents in contact center.
+Pagination Errors-If your contact center is huge, please change pagination settings in your lambda code, as in how many API calls to be made currently set to 100 at one go, then process next batch in the lambda "BulkExportAgentsLambda"
