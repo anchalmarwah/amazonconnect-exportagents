@@ -1,5 +1,5 @@
 # amazonconnect-exportagents
-This solution allows you to export the agents in Amazon Connect and their relevant details, such as security profiles, routing profiles queues etc in csv format, stores them in S3 bucket, this can then either be downloaded manually or can be integrated with Lambda and SES to send you the attachment.
+This solution allows you to export the agents in Amazon Connect and their relevant details, such as security profiles, routing profiles queues etc in csv format, stores them in S3 bucket, this can then be downloaded from S3 bucket. 
 
 #Solution:
 
@@ -7,19 +7,13 @@ This solution allows you to export the agents in Amazon Connect and their releva
 
 #We then write those details to CSV file and store it in the S3 bucket.
 
-#We can then export that CSV file from S3 bucket using another Lambda, called emailAttachmentLambda.
-#emailAttachmentLambda- This is triggered by the PUT event type in S3, with suffix .csv and prefix /tmp folder.
+#We can then manually download the file from S3 bucket.
 
-#Or We can manually download the file from S3 bucket.
+Please Note: For this solution to work, make sure your Lambda code has relevant read/write permissions to S3,AWS Connect etc, otherwise your Lambda Execution will fail. Also increase the time out if long list of agents in your contact center. Additionally the pagination settings has to be modified for extremely high API calls.
 
-#We will then define a rule on event bridge to trigger the first lambda function on a schedule.
-
-Please Note: For this solution to work, make sure your Lambda code has relevant read/write permissions to S3,SES,AWS Connect etc, otherwise your Lambda Execution will fail. Also increase the time out if long list of agents in your contact center. Additionally the pagination settings has to be modified for extremely high API calls.
-
-This solution can be customized as per your needs further, by modifying the codes.
-
+This solution can be customized as per your needs further, by modifying the codes and also can be extended with another Lambda to send email via SES, when file gets stored in S3 bucket.
 
 # For all troubleshooting steps if Lambda throws any error, please check the cloudwatch log group and check relevant logs.
 Most common errors:
-Permission Denied errors: Make sure you have provided IAM role of Lambda relevant permissions like reading files from S3, getting agent list and describing attributes in AWS Connect.
+Permission Denied errors: Make sure you have provided IAM role of Lambda relevant permissions like reading files from S3,AWS Connect getting agent list and describing attributes in AWS Connect.
 Timeout Errors- Make sure your Lambda has enough time out to run properly, and adjust as per your agents in contact center.
