@@ -11,7 +11,7 @@ This solution allows you to export the agents in Amazon Connect and their releva
 
 Please Note: For this solution to work, make sure your Lambda code has relevant read/write permissions to S3,AWS Connect etc, otherwise your Lambda Execution will fail. Also increase the time out if long list of agents in your contact center. 
 
-This solution can be customized as per your needs further, by modifying the codes and also can be extended with another Lambda to send email via SES, when file gets stored in S3 bucket.
+This solution can be customized as per your needs further, by modifying the codes and also can be extended with another Lambda_B as shown in architecture diagram to send email via SES, when file gets stored in S3 bucket.
 
 # For all troubleshooting steps if Lambda throws any error, please check the cloudwatch log group and check relevant logs.
 Most common errors:
